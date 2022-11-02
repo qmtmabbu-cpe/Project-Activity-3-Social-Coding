@@ -1,16 +1,25 @@
 from ipaddress import ip_address
 from urllib import response
 import requests
-import pytest
 
 
-# get the ip of the user#
+
+
 def get_ip():
     response = requests.get('https://api.ipify.org?format=json').json()
     return response["ip"]
-    
 
-#get the information of the user using the ip address"
+def get_ipv6():
+    response2 = requests.get('https://api64.ipify.org?format=json').json()
+    return response2 ["ip"]
+
+
+
+
+
+
+
+
 def get_location():
     ip_address = get_ip()
     response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
@@ -20,9 +29,7 @@ def get_location():
         "region": response.get("region"),
         "country": response.get("country_name"),
         "postal": response.get("postal")
-        
-        
-    }
+        }
     print("============================================")
     print("============================================")
     print("This is the Ipv4 of the user: " + ip_address)
@@ -38,15 +45,25 @@ def get_location():
     print("============================================")
     print("============================================")
     
-
-
-
-
     return location_data
 
+def get_location_ipv6():
+    ip_address2 = get_ipv6()
+    response2 = requests.get(f'https://ipapi.co/{ip_address2}/json/').json
+    loc_data = {
+        "IPv6": ip_address2,
+        }
+    print("============================================")
+    print("============================================")
+    print("This is the Ipv6 of the user: " + ip_address2)
+    print("============================================")
+    print("============================================")
+
+    return loc_data
 
 
 
 
 print(get_location())
+print(get_location_ipv6())
 
